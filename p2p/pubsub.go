@@ -11,8 +11,8 @@ import (
 
 // Represents the default fallback room and user names
 // if they aren't provided when the app is started
-const defaultclient = "client"
-const defaulttopic = "pubsub"
+const defaultclient = "icefiredb-p2p-client"
+const defaulttopic = "icefiredb-P2P-pubsub"
 
 // A structure that represents a PubSub Chat Room
 type PubSub struct {
@@ -56,12 +56,16 @@ type chatlog struct {
 	logmsg    string
 }
 
+func (c chatlog) String() string {
+	return fmt.Sprintf("%s: %s", c.logprefix, c.logmsg)
+}
+
 // A constructor function that generates and returns a new
 // PubSub for a given P2PHost, username and roomname
 func JoinPubSub(p2phost *P2P, clientName string, topicName string) (*PubSub, error) {
 
 	// Create a PubSub topic with the room name
-	topic, err := p2phost.PubSub.Join(fmt.Sprintf("pub-sub-p2p-%s", topicName))
+	topic, err := p2phost.PubSub.Join(fmt.Sprintf("icefiredb-sqlite-pub-sub-p2p-%s", topicName))
 	// Check the error
 	if err != nil {
 		return nil, err
