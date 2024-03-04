@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/rand"
 	"crypto/sha256"
+	"fmt"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -166,7 +167,7 @@ func (p2p *P2P) AnnounceConnect() {
 
 // A function that generates the p2p configuration options and creates a
 // libp2p host object for the given context. The created host is returned
-func setupHost(ctx context.Context, nodeHostIP string, nodeHostPort int)4 (host.Host, *dht.IpfsDHT) {
+func setupHost(ctx context.Context, nodeHostIP string, nodeHostPort int) (host.Host, *dht.IpfsDHT) {
 	// Set up the host identity options
 	prvkey, pubkey, err := crypto.GenerateKeyPairWithReader(crypto.RSA, 2048, rand.Reader)
 
